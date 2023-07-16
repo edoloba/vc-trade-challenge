@@ -1,8 +1,8 @@
 <template>
   <div>
-    <ul class="overflow-y-auto h-[20rem] md:h-[calc(100vh-190px)]" @scroll="handleScroll" ref="container">
+    <ul class="overflow-y-auto h-[20rem] lg:h-[calc(100vh-190px)]" @scroll="handleScroll" ref="container">
         <UserTile v-for="user in displayedUsers" :key="user.login.uuid" :user="user" @selected="selectUser(user)"/>
-        <li v-if="isLoadingMore && displayedUsers.length" class="p-2 m-4 flex border-2 border-slate-200 h-min md:h-32 text-center">Loading more</li>
+        <li v-if="isLoadingMore && displayedUsers.length" class="p-2 m-4 flex border-2 border-slate-200 h-min lg:h-32 text-center">Loading more</li>
     </ul>
   </div>
 </template>

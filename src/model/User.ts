@@ -1,9 +1,5 @@
 export interface User {
-    login: {
-        uuid: string;
-    }
     id: {
-        name: string;
         value: string;
     }
     gender: string;

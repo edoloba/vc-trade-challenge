@@ -12,5 +12,16 @@
     "lib": ["es2015"],
     "target": "es5",
     "module": "esnext",
-  }
+    "jsx": "preserve",
+    "strict": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "types": ["jest", "jest-extended", "vite/client", "@types/node", "@types/jest"],
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx", "tests/**/*.ts", "tests/**/*.tsx"],
+  "exclude": ["node_modules"]
 }
+

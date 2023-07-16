@@ -4,7 +4,7 @@
       v-model="searchQuery"
       type="text"
       placeholder="Search by name and/or surname"
-      class="p-1 md:p-2 w-full md:w-[30rem] border rounded placeholder-slate-[#393535] bg-transparent border-b-1px focus:border-slate-[#393535] focus:shadow-[0px_1px_0_0_#393535]"
+      class="p-1 lg:p-2 w-full lg:w-[30rem] border rounded placeholder-slate-[#393535] bg-transparent border-b-1px focus:border-slate-[#393535] focus:shadow-[0px_1px_0_0_#393535]"
     />
     <select
       v-model="selectedGenderValue"

@@ -1,7 +1,7 @@
 <template>
   <li 
   @click="selectUser"
-  class="p-2 m-4 flex border-2 border-slate-200 h-min md:h-32"
+  class="p-2 m-4 flex border-2 border-slate-200 h-min lg:h-32"
   >
     <img
       :src="user.picture.thumbnail"
@@ -9,8 +9,8 @@
       class="rounded-full"
     />
     <div class="flex flex-col pl-3 justify-center">
-      <p class="text-md md:text-xl">{{ user.name.first }} {{ user.name.last }}</p>
-      <p class="text-sm md:text-md">{{ user.email }}</p>
+      <p class="text-md lg:text-xl">{{ user.name.first }} {{ user.name.last }}</p>
+      <p class="text-sm lg:text-md">{{ user.email }}</p>
     </div>
   </li>
 </template>

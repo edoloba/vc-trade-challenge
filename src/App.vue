@@ -1,14 +1,14 @@
 <template>
   <main>
     <header
-      class="h-12 w-full md:h-20 p-1 sticky border-b-2 broder-white-600 flex justify-center items-center"
+      class="h-12 w-full lg:h-20 p-1 sticky border-b-2 broder-white-600 flex justify-center items-center"
     >
       <h1 class="text-2xl font-bold">VC-TRADE User Finder</h1>
     </header>
-    <section class="w-full flex flex-col md:flex-row">
+    <section class="w-full flex flex-col lg:flex-row">
       <aside flex="w-full flex flex-col">
         <div
-          class="w-full flex flex-col justify-start h-24 md:h-28 border-b-2 border-slate-200 pb-1 md:pb-3"
+          class="w-full flex flex-col justify-start h-24 lg:h-28 border-b-2 border-slate-200 pb-1 lg:pb-3"
         >
           <FilteredList
             :users="users"
@@ -16,7 +16,7 @@
             v-model:selectedGender="selectedGender"
           />
         </div>
-        <div class="border-b-2 border-slate-200 md:border-b-0">
+        <div class="border-b-2 border-slate-200 lg:border-b-0">
           <UsersList
             :users="filteredUsers"
             :selectedGender="selectedGender"
@@ -25,7 +25,9 @@
           />
         </div>
       </aside>
-      <article class="border-l-0 md:border-l-2 border-white-600 w-full flex justify-center items-center">
+      <article
+        class="border-l-0 lg:border-l-2 border-white-600 w-full flex justify-center items-center"
+      >
         <UserDetails :user="selectedUser" />
       </article>
     </section>
@@ -41,7 +43,7 @@ import FilteredList from './components/FilteredList.vue'
 import UserDetails from './components/UserDetails.vue'
 
 const resultsPerPage = 25
-declare let sessionStorage: any;
+declare let sessionStorage: any
 
 export default defineComponent({
   components: {
@@ -57,19 +59,19 @@ export default defineComponent({
 
     const fetchUsers = async () => {
       try {
-        const storedUsers = sessionStorage.getItem('users');
-        if(storedUsers){
+        const storedUsers = sessionStorage.getItem('users')
+        if (storedUsers) {
           users.value = JSON.parse(storedUsers)
         } else {
           const response = await axios.get(`https://randomuser.me/api/?results=${resultsPerPage}`)
-          users.value = response.data.results;
+          users.value = response.data.results
           sessionStorage.setItem('users', JSON.stringify(users.value))
         }
       } catch (error) {
         console.log(error)
       }
     }
-    
+
     // Filter users
     const filteredUsers = computed(() => {
       const query = searchQuery.value.trim().toLowerCase()
@@ -91,37 +93,34 @@ export default defineComponent({
 
     const showUserDetails = (user: User) => {
       selectedUser.value = { ...user }
-      if(typeof sessionStorage !== 'undefined') {
+      if (typeof sessionStorage !== 'undefined') {
         sessionStorage.setItem('selectedUser', JSON.stringify(user))
       }
     }
 
     fetchUsers()
-    
+
     const updateUserList = (newUserList: any) => {
-      users.value = newUserList;
-      if(typeof sessionStorage !== 'undefined') {
+      users.value = newUserList
+      if (typeof sessionStorage !== 'undefined') {
         sessionStorage.setItem('users', JSON.stringify(users.value))
       }
     }
 
     // Save search query and selected gender to sessionStorage whenever they change
-    watch(
-      [searchQuery, selectedGender],
-      ([newSearchQuery, newSelectedGender]) => {
-        if(typeof sessionStorage !== 'undefined') {
+    watch([searchQuery, selectedGender], ([newSearchQuery, newSelectedGender]) => {
+      if (typeof sessionStorage !== 'undefined') {
         sessionStorage.setItem('searchQuery', newSearchQuery)
         sessionStorage.setItem('selectedGender', newSelectedGender)
       }
-    }
-    )
+    })
 
     // Fetch users and retrieve previous state from sessionStorage on component mount
     onMounted(() => {
       fetchUsers()
-      if(typeof sessionStorage !== 'undefined') {
+      if (typeof sessionStorage !== 'undefined') {
         const storedSelectedUser = sessionStorage.getItem('selectedUser')
-        if(storedSelectedUser) {
+        if (storedSelectedUser) {
           selectedUser.value = JSON.parse(storedSelectedUser)
         }
       }
@@ -129,11 +128,11 @@ export default defineComponent({
 
     // Clean up sessionStorage on component unmount
     onBeforeUnmount(() => {
-      if(typeof sessionStorage!== 'undefined') {
-      sessionStorage.removeItem('searchQuery')
-      sessionStorage.removeItem('selectedGender')
-      sessionStorage.removeItem('selectedUser')
-      sessionStorage.removeItem('users')
+      if (typeof sessionStorage !== 'undefined') {
+        sessionStorage.removeItem('searchQuery')
+        sessionStorage.removeItem('selectedGender')
+        sessionStorage.removeItem('selectedUser')
+        sessionStorage.removeItem('users')
       }
     })
 
@@ -144,7 +143,7 @@ export default defineComponent({
       selectedGender,
       filteredUsers,
       showUserDetails,
-      updateUserList,
+      updateUserList
     }
   }
 })
